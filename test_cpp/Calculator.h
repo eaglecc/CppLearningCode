@@ -1,4 +1,6 @@
 #pragma once
+
+// ∂‡Ã¨—ßœ∞
 class Calculator
 {
 public:
