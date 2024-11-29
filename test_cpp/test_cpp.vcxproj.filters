@@ -24,12 +24,18 @@
     <ClCompile Include="Calculator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="FileOperator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FuncPointer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Calculator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileOperator.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

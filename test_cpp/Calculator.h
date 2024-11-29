@@ -1,8 +1,7 @@
 #pragma once
 
 // ∂‡Ã¨—ßœ∞
-class Calculator
-{
+class Calculator {
 public:
 
     virtual double add(double, double) { return 0; }
@@ -12,8 +11,7 @@ public:
 
 };
 
-class Add :public Calculator
-{
+class Add :public Calculator {
 public:
     double add(double a, double b) override {
         return a + b;
@@ -29,14 +27,14 @@ public:
 
 class Mul :public Calculator {
 public:
-    double mul(double a, double b) override{
+    double mul(double a, double b) override {
         return a * b;
     };
 };
 
 class Div : public Calculator {
 public:
-    double div(double a, double b) override{
+    double div(double a, double b) override {
         if (b == 0)
         {
             return 0;
