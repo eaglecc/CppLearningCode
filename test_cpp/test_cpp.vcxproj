@@ -132,11 +132,16 @@
     <ClCompile Include="FileOperator.cpp" />
     <ClCompile Include="FuncPointer.cpp" />
     <ClCompile Include="hello.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="FileOperator.h" />
     <ClInclude Include="FuncPointer.h" />
+    <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="Student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

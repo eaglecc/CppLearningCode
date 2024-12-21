@@ -34,27 +34,27 @@ char* my_strcat(char *dest, const char* src) {
     return original_dest;
 }
 
-int main() {
-    char str1[20] = "Hello ";
-    const char* str2 = "World";
-    //char* res = strcat(str1, str2); // 字符串拼接
-    //std::cout << "strcat字符串拼接结果：" << res << std::endl;
-
-    //strcat_s(str1, sizeof(str1), str2);
-    //std::cout << str1 << std::endl;
-
-    //strcpy(str1 + strlen(str1), str2);
-    //std::cout << "strcpy字符串复制实现拼接结果：" << str1 << std::endl;
-
-    //my_strcpy(str1 + strlen(str1), str2);
-    //std::cout << str1 << std::endl;
-
-    //my_strcat(str1, str2);
-    //std::cout << str1 << std::endl;
-
-    char msg[] = { 'a','b','c','\0' };
-    std::cout << strlen(msg) << std::endl;
-
-    return 0;
-}
+//int main() {
+//    char str1[20] = "Hello ";
+//    const char* str2 = "World";
+//    //char* res = strcat(str1, str2); // 字符串拼接
+//    //std::cout << "strcat字符串拼接结果：" << res << std::endl;
+//
+//    //strcat_s(str1, sizeof(str1), str2);
+//    //std::cout << str1 << std::endl;
+//
+//    //strcpy(str1 + strlen(str1), str2);
+//    //std::cout << "strcpy字符串复制实现拼接结果：" << str1 << std::endl;
+//
+//    //my_strcpy(str1 + strlen(str1), str2);
+//    //std::cout << str1 << std::endl;
+//
+//    //my_strcat(str1, str2);
+//    //std::cout << str1 << std::endl;
+//
+//    char msg[] = { 'a','b','c','\0' };
+//    std::cout << strlen(msg) << std::endl;
+//
+//    return 0;
+//}
 
