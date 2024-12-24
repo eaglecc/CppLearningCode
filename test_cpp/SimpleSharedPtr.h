@@ -60,7 +60,10 @@ public:
     }
 
     // 移动构造函数  SimpleSharedPtr S2(std::move(S1));
-    SimpleSharedPtr(SimpleSharedPtr&& other) : ptr(other.ptr), control_block(other.control_block) {
+    SimpleSharedPtr(SimpleSharedPtr&& other) : ptr(other.ptr), control_block(other.control_block)  {
+        if (&other == this) {
+            return;
+        }
         other.ptr = nullptr;
         other.control_block = nullptr;
     }

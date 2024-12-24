@@ -134,6 +134,7 @@
     <ClCompile Include="hello.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SimpleSharedPtr.cpp" />
     <ClCompile Include="Student.cpp" />
   </ItemGroup>
@@ -142,6 +143,7 @@
     <ClInclude Include="FileOperator.h" />
     <ClInclude Include="FuncPointer.h" />
     <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SimpleSharedPtr.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
