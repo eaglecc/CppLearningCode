@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7247f553-4543-4189-b98c-159f0a4c9b6d}</ProjectGuid>
-    <RootNamespace>testcpp</RootNamespace>
+    <ProjectGuid>{72fa21e0-ebe9-414c-aef4-ed3c70efbd7d}</ProjectGuid>
+    <RootNamespace>testclient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,27 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Calculator.cpp" />
-    <ClCompile Include="CStringTest.cpp" />
-    <ClCompile Include="FileOperator.cpp" />
-    <ClCompile Include="FuncPointer.cpp" />
-    <ClCompile Include="hello.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MemoryPool.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="SimpleSharedPtr.cpp" />
-    <ClCompile Include="SocketServer.cpp" />
-    <ClCompile Include="Student.cpp" />
+    <ClCompile Include="ClientSocket.cpp" />
+    <ClCompile Include="test_client.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Calculator.h" />
-    <ClInclude Include="FileOperator.h" />
-    <ClInclude Include="FuncPointer.h" />
-    <ClInclude Include="MemoryPool.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="SimpleSharedPtr.h" />
-    <ClInclude Include="SocketServer.h" />
-    <ClInclude Include="Student.h" />
+    <ClInclude Include="ClientSocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

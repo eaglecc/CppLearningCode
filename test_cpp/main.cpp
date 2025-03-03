@@ -3,21 +3,10 @@
 #include "Student.h"
 #include "SimpleSharedPtr.h"
 #include "ResourceManager.h"
+#include "SocketServer.h"
+
 
 int main() {
-    {
-        ResourceManager resourceManager(10);
-        int res = resourceManager.getValue();
-        std::cout << "Resource value: " << res << std::endl;
-
-        resourceManager.setValue(20);
-        res = resourceManager.getValue();
-        std::cout << "Resource value: " << res << std::endl;
-
-        ResourceManager resourceManager2(std::move(resourceManager));
-        std::cout << "Resource value: " << resourceManager2.getValue() << std::endl;
-        //std::cout << "Resource value: " << resourceManager.getValue() << std::endl;
-    }
-
+    SocketServer server;
     return 0;
 }
