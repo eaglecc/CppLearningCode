@@ -9,10 +9,10 @@ class SocketServer
 public:
     SocketServer();
     ~SocketServer();
-
+    void handleError(const char*);
 
 private:
     int m_socket;
-    sockaddr_in addr;
+    struct sockaddr_in addr;
 };
 

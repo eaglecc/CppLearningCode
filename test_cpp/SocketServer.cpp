@@ -69,3 +69,9 @@ SocketServer::~SocketServer()
     closesocket(m_socket);
     WSACleanup();
 }
+
+void SocketServer::handleError(const char*s)
+{
+    perror(s);
+    exit(-1);
+}
