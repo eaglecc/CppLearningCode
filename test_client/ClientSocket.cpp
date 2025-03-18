@@ -23,16 +23,18 @@ ClientSocket::ClientSocket()
         closesocket(m_socket);
         WSACleanup();
     }
-    // 3. send
-    char buf[1024];
-    memset(buf, 0, sizeof(buf));
-    strcpy_s(buf, "Hello, Server!");
-    send(m_socket, buf, sizeof(buf), 0);
-    std::cout << "客户端发送消息：" << buf << std::endl;
-    // 4. recv
-    memset(buf, 0, sizeof(buf));
-    recv(m_socket, buf, sizeof(buf), 0);
-    std::cout << "客户端接收消息：" << buf << std::endl;
+    for (;;) {
+        // 3. send
+        char buf[1024];
+        memset(buf, 0, sizeof(buf));
+        scanf_s("%s", buf, sizeof(buf));
+        send(m_socket, buf, sizeof(buf), 0);
+        std::cout << "客户端发送消息：" << buf << std::endl;
+        // 4. recv
+        memset(buf, 0, sizeof(buf));
+        recv(m_socket, buf, sizeof(buf), 0);
+        std::cout << "客户端接收消息：" << buf << std::endl;
+    }
 
     Sleep(10000); // 测试客户端退出时间 是否会组织服务器端退出
 }

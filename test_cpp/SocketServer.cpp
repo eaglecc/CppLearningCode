@@ -132,21 +132,24 @@ void SocketServer::handleClient(int cli_socket)
 {
     std::cout << "客户端已连接, clisocket id：" << cli_socket << std::endl;
     char buf[1024];
-    // 5. recv
-    memset(buf, 0, sizeof(buf));
-    int bytesReceived = recv(cli_socket, buf, sizeof(buf), 0);
-    if (bytesReceived <= 0) {
-        std::cerr << "接收失败或客户端断开连接" << std::endl;
-        closesocket(cli_socket);
-        return;
+    for (;;) {
+        // 5. recv
+        memset(buf, 0, sizeof(buf));
+        int bytesReceived = recv(cli_socket, buf, sizeof(buf), 0);
+        if (bytesReceived <= 0) {
+            std::cerr << "接收失败或客户端断开连接" << std::endl;
+            closesocket(cli_socket);
+            return;
+        }
+        std::cout << "服务器接收消息：" << buf << std::endl;
+        // 6. send
+        for (size_t i = 0; buf[i] != '\0'; i++)
+        {
+            buf[i] = std::toupper(buf[i]);
+        }
+        send(cli_socket, buf, sizeof(buf), 0);
+        memset(buf, 0, sizeof(buf));
     }
-    std::cout << "服务器接收消息：" << buf << std::endl;
-    // 6. send
-    for (size_t i = 0; buf[i] != '\0'; i++)
-    {
-        buf[i] = std::toupper(buf[i]);
-    }
-    send(cli_socket, buf, sizeof(buf), 0);
-    memset(buf, 0, sizeof(buf));
+
     closesocket(cli_socket);
 }
