@@ -12,6 +12,7 @@ ClientSocket::ClientSocket()
     if (m_socket == INVALID_SOCKET) {
         printf("socket failed with error: %ld\n", WSAGetLastError());
     }
+    std::cout << "client Socket.." << m_socket << std::endl;
     // 2. connect
     addr.sin_family = AF_INET;
     addr.sin_port = htons(9527);

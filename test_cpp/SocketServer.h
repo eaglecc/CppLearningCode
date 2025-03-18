@@ -8,8 +8,10 @@ class SocketServer
 {
 public:
     SocketServer();
+    SocketServer(int);
     ~SocketServer();
     void handleError(const char*);
+    void handleClient(int);
 
 private:
     int m_socket;
