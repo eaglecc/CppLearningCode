@@ -66,7 +66,64 @@ SocketServer::SocketServer() : m_socket(INVALID_SOCKET)
 }
 
 // 多线程并发服务器
-SocketServer::SocketServer(int)
+SocketServer::SocketServer(int serverType)
+{
+    switch (serverType)
+    {
+    case 1:
+        std::cout << "多线程并发服务器" << std::endl;
+        multiThreadServer();
+        break;
+    case 2:
+        std::cout << "IO复用并发服务器--Select" << std::endl;
+        break;
+    default:
+        break;
+    }
+    
+}
+
+
+
+SocketServer::~SocketServer()
+{
+    closesocket(m_socket);
+    WSACleanup();
+}
+
+void SocketServer::handleError(const char*s)
+{
+    perror(s);
+    exit(-1);
+}
+
+void SocketServer::handleClient(int cli_socket)
+{
+    std::cout << "客户端已连接, clisocket id：" << cli_socket << std::endl;
+    char buf[1024];
+    for (;;) {
+        // 5. recv
+        memset(buf, 0, sizeof(buf));
+        int bytesReceived = recv(cli_socket, buf, sizeof(buf), 0);
+        if (bytesReceived <= 0) {
+            std::cerr << "接收失败或客户端断开连接" << std::endl;
+            closesocket(cli_socket);
+            return;
+        }
+        std::cout << "服务器接收消息：" << buf << std::endl;
+        // 6. send
+        for (size_t i = 0; buf[i] != '\0'; i++)
+        {
+            buf[i] = std::toupper(buf[i]);
+        }
+        send(cli_socket, buf, sizeof(buf), 0);
+        memset(buf, 0, sizeof(buf));
+    }
+
+    closesocket(cli_socket);
+}
+
+void SocketServer::multiThreadServer()
 {
     WSADATA wsaData;
     int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -116,40 +173,8 @@ SocketServer::SocketServer(int)
     return;
 }
 
-SocketServer::~SocketServer()
+// select IO复用服务器
+void SocketServer::SelectIOmultiplexingServer()
 {
-    closesocket(m_socket);
-    WSACleanup();
-}
 
-void SocketServer::handleError(const char*s)
-{
-    perror(s);
-    exit(-1);
-}
-
-void SocketServer::handleClient(int cli_socket)
-{
-    std::cout << "客户端已连接, clisocket id：" << cli_socket << std::endl;
-    char buf[1024];
-    for (;;) {
-        // 5. recv
-        memset(buf, 0, sizeof(buf));
-        int bytesReceived = recv(cli_socket, buf, sizeof(buf), 0);
-        if (bytesReceived <= 0) {
-            std::cerr << "接收失败或客户端断开连接" << std::endl;
-            closesocket(cli_socket);
-            return;
-        }
-        std::cout << "服务器接收消息：" << buf << std::endl;
-        // 6. send
-        for (size_t i = 0; buf[i] != '\0'; i++)
-        {
-            buf[i] = std::toupper(buf[i]);
-        }
-        send(cli_socket, buf, sizeof(buf), 0);
-        memset(buf, 0, sizeof(buf));
-    }
-
-    closesocket(cli_socket);
 }

@@ -9,9 +9,12 @@ class SocketServer
 public:
     SocketServer();
     SocketServer(int);
+
     ~SocketServer();
     void handleError(const char*);
     void handleClient(int);
+    void multiThreadServer();
+    void SelectIOmultiplexingServer();
 
 private:
     int m_socket;
