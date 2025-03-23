@@ -78,10 +78,15 @@ SocketServer::SocketServer(int serverType)
         std::cout << "IO复用并发服务器--Select" << std::endl;
         SelectIOmultiplexingServer();
         break;
+    case 3:
+        std::cout << "IO复用并发服务器--Epoll" << std::endl;
+        // Windows 下没有epoll ，可以考虑 IOCP 替代，或者使用第三方库
+        //EpollIoMultiplexingServer();
+        break;
     default:
         break;
     }
-    
+
 }
 
 
@@ -92,7 +97,7 @@ SocketServer::~SocketServer()
     WSACleanup();
 }
 
-void SocketServer::handleError(const char*s)
+void SocketServer::handleError(const char* s)
 {
     perror(s);
     exit(-1);
@@ -212,6 +217,7 @@ void SocketServer::SelectIOmultiplexingServer()
     int maxfd = m_socket; // 最大文件描述符
     int nready; // 准备好的文件描述符个数
     while (1) {
+        std::cout << "while..." << std::endl;
         readfds = allfds; // 读文件描述符集合
         // 5. select
         nready = select(maxfd + 1, &readfds, NULL, NULL, NULL);
@@ -247,7 +253,7 @@ void SocketServer::SelectIOmultiplexingServer()
         for (int i = m_socket + 1; i <= maxfd; i++) {
             std::cout << "lfd..." << m_socket << std::endl;
             std::cout << "maxfd..." << maxfd << std::endl;
-            
+
             if (FD_ISSET(i, &readfds)) {
                 char buf[1024];
                 memset(buf, 0, sizeof(buf));

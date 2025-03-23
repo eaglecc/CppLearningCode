@@ -7,6 +7,6 @@
 
 
 int main() {
-    SocketServer server(2);
+    SocketServer server(3);
     return 0;
 }
