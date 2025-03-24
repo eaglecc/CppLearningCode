@@ -134,20 +134,24 @@
     <ClCompile Include="hello.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="Producer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SimpleSharedPtr.cpp" />
     <ClCompile Include="SocketServer.cpp" />
     <ClCompile Include="Student.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="FileOperator.h" />
     <ClInclude Include="FuncPointer.h" />
     <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="Producer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SimpleSharedPtr.h" />
     <ClInclude Include="SocketServer.h" />
     <ClInclude Include="Student.h" />
+    <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
