@@ -1,4 +1,4 @@
-#include "ClientSocket.h"
+ï»¿#include "ClientSocket.h"
 
 ClientSocket::ClientSocket()
 {
@@ -19,7 +19,7 @@ ClientSocket::ClientSocket()
     inet_pton(AF_INET, "127.0.0.1", &addr.sin_addr);
 
     if (connect(m_socket, (sockaddr*)&addr, sizeof(addr)) == SOCKET_ERROR) {
-        std::cerr << "Connect Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Connect å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
     }
@@ -29,14 +29,14 @@ ClientSocket::ClientSocket()
         memset(buf, 0, sizeof(buf));
         scanf_s("%s", buf, sizeof(buf));
         send(m_socket, buf, sizeof(buf), 0);
-        std::cout << "¿Í»§¶Ë·¢ËÍÏûÏ¢£º" << buf << std::endl;
+        std::cout << "å®¢æˆ·ç«¯å‘é€æ¶ˆæ¯ï¼š" << buf << std::endl;
         // 4. recv
         memset(buf, 0, sizeof(buf));
         recv(m_socket, buf, sizeof(buf), 0);
-        std::cout << "¿Í»§¶Ë½ÓÊÕÏûÏ¢£º" << buf << std::endl;
+        std::cout << "å®¢æˆ·ç«¯æŽ¥æ”¶æ¶ˆæ¯ï¼š" << buf << std::endl;
     }
 
-    Sleep(10000); // ²âÊÔ¿Í»§¶ËÍË³öÊ±¼ä ÊÇ·ñ»á×éÖ¯·þÎñÆ÷¶ËÍË³ö
+    Sleep(10000); // æµ‹è¯•å®¢æˆ·ç«¯é€€å‡ºæ—¶é—´ æ˜¯å¦ä¼šç»„ç»‡æœåŠ¡å™¨ç«¯é€€å‡º
 }
 
 ClientSocket::~ClientSocket()

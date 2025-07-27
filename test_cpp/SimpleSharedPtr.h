@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 struct ControlBlock {
     int ref_count;
@@ -37,14 +37,14 @@ public:
         }
     }
 
-    // ¿½±´¹¹Ôìº¯ÊıÖØÔØ SimpleSharedPtr S2(S1);
+    // æ‹·è´æ„é€ å‡½æ•°é‡è½½ SimpleSharedPtr S2(S1);
     SimpleSharedPtr(const SimpleSharedPtr& other) : ptr(other.ptr), control_block(other.control_block) {
         if (control_block) {
             ++control_block->ref_count;
         }
     }
 
-    // ¸³ÖµÔËËã·ûÖØÔØ S1 = S2; ¸³ÖµÍêÁËS2»¹ÔÚ£¬S1ºÍS2Ö¸ÏòÍ¬Ò»¿éÄÚ´æ£¬ÒıÓÃ¼ÆÊı¼Ó1
+    // èµ‹å€¼è¿ç®—ç¬¦é‡è½½ S1 = S2; èµ‹å€¼å®Œäº†S2è¿˜åœ¨ï¼ŒS1å’ŒS2æŒ‡å‘åŒä¸€å—å†…å­˜ï¼Œå¼•ç”¨è®¡æ•°åŠ 1
     SimpleSharedPtr& operator=(const SimpleSharedPtr& other) {
         if (this != &other) {
             if (ptr) {
@@ -59,7 +59,7 @@ public:
         return *this;
     }
 
-    // ÒÆ¶¯¹¹Ôìº¯Êı  SimpleSharedPtr S2(std::move(S1));
+    // ç§»åŠ¨æ„é€ å‡½æ•°  SimpleSharedPtr S2(std::move(S1));
     SimpleSharedPtr(SimpleSharedPtr&& other) : ptr(other.ptr), control_block(other.control_block)  {
         if (&other == this) {
             return;
@@ -68,7 +68,7 @@ public:
         other.control_block = nullptr;
     }
 
-    // ÒÆ¶¯¸³ÖµÔËËã·ûÖØÔØ S1 = std::move(S2); ¸´ÖÆÍêÁËS2²»ÔÚÁË£¬S2Ö¸Ïònullptr£¬S1Ö¸ÏòÔ­À´µÄÄÚ´æ£¬ÒıÓÃ¼ÆÊı²»±ä
+    // ç§»åŠ¨èµ‹å€¼è¿ç®—ç¬¦é‡è½½ S1 = std::move(S2); å¤åˆ¶å®Œäº†S2ä¸åœ¨äº†ï¼ŒS2æŒ‡å‘nullptrï¼ŒS1æŒ‡å‘åŸæ¥çš„å†…å­˜ï¼Œå¼•ç”¨è®¡æ•°ä¸å˜
     SimpleSharedPtr& operator=(SimpleSharedPtr&& other) noexcept {
         if (this != &other) {
             if (ptr) {

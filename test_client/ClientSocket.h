@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <iostream>
-#pragma comment(lib, "Ws2_32.lib")  // Á´½Ó Windows Socket ¿â
+#pragma comment(lib, "Ws2_32.lib")  // é“¾æŽ¥ Windows Socket åº“
 
 
 class ClientSocket

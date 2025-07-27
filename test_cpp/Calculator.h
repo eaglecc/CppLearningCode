@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-// ��̬ѧϰ
+// 多态学习
 class Calculator {
 public:
 

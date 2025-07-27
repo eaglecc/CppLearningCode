@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <mutex>
 //#include "MemoryPool.h"
 //#include "Student.h"
@@ -18,12 +18,12 @@ void testFunction(int id) {
 
 int main() {
     ThreadPool pool(4);
-    // Ä£ÄâÌí¼Ó10¸öÈÎÎñ
+    // æ¨¡æ‹Ÿæ·»åŠ 10ä¸ªä»»åŠ¡ 
     for (size_t i = 0; i < 100; i++)
     {
         pool.enqueue([i]() {testFunction(i); });
     }
-    std::this_thread::sleep_for(std::chrono::seconds(2)); // µÈ´ıÈÎÎñÖ´ĞĞ
+    std::this_thread::sleep_for(std::chrono::seconds(2)); // ç­‰å¾…ä»»åŠ¡æ‰§è¡Œ
 
     return 0;
 }

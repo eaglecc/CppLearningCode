@@ -1,4 +1,4 @@
-#include "Producer.h"
+ï»¿#include "Producer.h"
 
 Producer::Producer(size_t maxSize) : maxSize(maxSize), stop(false)
 {
@@ -10,13 +10,13 @@ Producer::~Producer()
     stopProcessing();
 }
 
-// Æô¶¯¶à¸öÏß³Ì
+// å¯åŠ¨å¤šä¸ªçº¿ç¨‹
 void Producer::start(size_t producerNum, size_t consumerNum)
 {
     for (size_t i = 0; i < producerNum; ++i)
     {
         producers.emplace_back(&Producer::produce, this, i + 1);
-        // µÈ¼ÛÓÚ producers.push_back(std::thread(&ProducerConsumer::produce, this, i + 1));
+        // ç­‰ä»·äº producers.push_back(std::thread(&ProducerConsumer::produce, this, i + 1));
     }
     for (size_t i = 0; i < consumerNum; i++)
     {
@@ -24,23 +24,23 @@ void Producer::start(size_t producerNum, size_t consumerNum)
     }
 }
 
-// Éú²úÕßÏß³Ì£º²»¶Ï²úÉúÊı¾İ£¬·ÅÈë»º³åÇøbufferÖĞ
+// ç”Ÿäº§è€…çº¿ç¨‹ï¼šä¸æ–­äº§ç”Ÿæ•°æ®ï¼Œæ”¾å…¥ç¼“å†²åŒºbufferä¸­
 void Producer::produce(int id)
 {
     int item = 1;
     while (true) {
         {
-            std::unique_lock<std::mutex> lock(mtx);  // Ê¹ÓÃ»¥³âËø mtx À´±£»¤¹²Ïí×ÊÔ´ buffer¡£
-            condVar.wait(lock, [this] { return buffer.size() < maxSize; }); // µ±»º³åÇøÎ´ÂúÊ±¼ÌĞøÖ´ĞĞ£¬·ñÔòµÈ´ı
+            std::unique_lock<std::mutex> lock(mtx);  // ä½¿ç”¨äº’æ–¥é” mtx æ¥ä¿æŠ¤å…±äº«èµ„æº bufferã€‚
+            condVar.wait(lock, [this] { return buffer.size() < maxSize; }); // å½“ç¼“å†²åŒºæœªæ»¡æ—¶ç»§ç»­æ‰§è¡Œï¼Œå¦åˆ™ç­‰å¾…
 
-            if (stop) break; // Èç¹û stop Îª true£¬ÍË³öÑ­»·
+            if (stop) break; // å¦‚æœ stop ä¸º trueï¼Œé€€å‡ºå¾ªç¯
 
-            buffer.push(item); // Éú²úÊı¾İ£¬·ÅÈë»º³åÇø
+            buffer.push(item); // ç”Ÿäº§æ•°æ®ï¼Œæ”¾å…¥ç¼“å†²åŒº
             std::cout << "Producer " << id << " produce item " << item << std::endl;
             item++;
-        } // ÕâÀï×÷ÓÃÓò½áÊø£¬`lock` ×Ô¶¯ÊÍ·Å»¥³âËø
+        } // è¿™é‡Œä½œç”¨åŸŸç»“æŸï¼Œ`lock` è‡ªåŠ¨é‡Šæ”¾äº’æ–¥é”
 
-        condVar.notify_all();  // Í¨ÖªÏû·ÑÕß£¬ÓĞÊı¾İ¿ÉÏû·Ñ
+        condVar.notify_all();  // é€šçŸ¥æ¶ˆè´¹è€…ï¼Œæœ‰æ•°æ®å¯æ¶ˆè´¹
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
@@ -50,20 +50,20 @@ void Producer::consume(int id)
     while (true) {
         int item;
         {
-            std::unique_lock<std::mutex> lock(mtx); // Ê¹ÓÃ»¥³âËø mtx À´±£»¤¹²Ïí×ÊÔ´ buffer¡£
-            condVar.wait(lock, [this] { return !buffer.empty() || stop; }); // µÈ´ıÌõ¼ş±äÁ¿ condVar£¬Ö±µ½»º³åÇø buffer ·Ç¿Õ»ò stop ±êÖ¾Îª true¡£
-            if (stop && buffer.empty()) break; // Èç¹û stop ±êÖ¾Îª true ÇÒ»º³åÇøÎª¿Õ£¬ÔòÍË³öÑ­»·£¬ÖÕÖ¹Ïß³Ì¡£
+            std::unique_lock<std::mutex> lock(mtx); // ä½¿ç”¨äº’æ–¥é” mtx æ¥ä¿æŠ¤å…±äº«èµ„æº bufferã€‚
+            condVar.wait(lock, [this] { return !buffer.empty() || stop; }); // ç­‰å¾…æ¡ä»¶å˜é‡ condVarï¼Œç›´åˆ°ç¼“å†²åŒº buffer éç©ºæˆ– stop æ ‡å¿—ä¸º trueã€‚
+            if (stop && buffer.empty()) break; // å¦‚æœ stop æ ‡å¿—ä¸º true ä¸”ç¼“å†²åŒºä¸ºç©ºï¼Œåˆ™é€€å‡ºå¾ªç¯ï¼Œç»ˆæ­¢çº¿ç¨‹ã€‚
 
             item = buffer.front();
             buffer.pop();
             std::cout << "Consumer " << id << " consumed: " << item << std::endl;
         }
-        condVar.notify_all(); // Í¨ÖªËùÓĞµÈ´ıÔÚÌõ¼ş±äÁ¿ condVar ÉÏµÄÏß³Ì£¬»º³åÇø×´Ì¬ÒÑ¸Ä±ä¡£
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // Ä£ÄâÏû·ÑÕß´¦ÀíÊı¾İµÄÊ±¼ä¡£
+        condVar.notify_all(); // é€šçŸ¥æ‰€æœ‰ç­‰å¾…åœ¨æ¡ä»¶å˜é‡ condVar ä¸Šçš„çº¿ç¨‹ï¼Œç¼“å†²åŒºçŠ¶æ€å·²æ”¹å˜ã€‚
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // æ¨¡æ‹Ÿæ¶ˆè´¹è€…å¤„ç†æ•°æ®çš„æ—¶é—´ã€‚
     }
 }
 
-// ¸ºÔğ°²È«ÖÕÖ¹ËùÓĞÏß³Ì
+// è´Ÿè´£å®‰å…¨ç»ˆæ­¢æ‰€æœ‰çº¿ç¨‹
 void Producer::stopProcessing()
 {
     {

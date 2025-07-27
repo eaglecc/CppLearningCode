@@ -1,7 +1,7 @@
-#include "FuncPointer.h"
+ï»¿#include "FuncPointer.h"
 
 //int main(void) {
-//    // ptrMemberFunc ÊÇ FuncPointer µÄ³ÉÔ±º¯ÊýÖ¸Õë, µ÷ÓÃ³ÉÔ±µÄÊ±ºò£¬ÓÃ .  »òÕß  -> ³ÉÔ±Ö¸ÕëÔËËã·û
+//    // ptrMemberFunc æ˜¯ FuncPointer çš„æˆå‘˜å‡½æ•°æŒ‡é’ˆ, è°ƒç”¨æˆå‘˜çš„æ—¶å€™ï¼Œç”¨ .  æˆ–è€…  -> æˆå‘˜æŒ‡é’ˆè¿ç®—ç¬¦
 //    double (FuncPointer:: * ptrMemberFunc)(double, double);
 //    ptrMemberFunc = &FuncPointer::add;
 //
@@ -14,7 +14,7 @@
 //    res = (pObj->*ptrMemberFunc)(5, 5);
 //    std::cout << res << std::endl; // 25
 //
-//    // Ðéº¯ÊýÖ¸Õë
+//    // è™šå‡½æ•°æŒ‡é’ˆ
 //    void (BaseClass:: *pMemFunc)() = &BaseClass::print;
 //    BaseClass* pBaseObj = new SubClass();
 //    (pBaseObj->*pMemFunc)(); // Sub Class

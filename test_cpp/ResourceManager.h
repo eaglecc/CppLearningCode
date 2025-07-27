@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <memory>
 #include <iostream>
 
@@ -7,11 +7,11 @@ class ResourceManager
 public:
     ResourceManager() : resource(nullptr) {};
     ResourceManager(int resource) {
-        this->resource = std::make_unique<int>(resource); // ·ÖÅä×ÊÔ´
+        this->resource = std::make_unique<int>(resource); // åˆ†é…èµ„æº
         std::cout << "Resource allocated." << std::endl;
     };
 
-    // ÒÆ¶¯¹¹Ôìº¯Êı  ResourceManager S2(std::move(S1));
+    // ç§»åŠ¨æ„é€ å‡½æ•°  ResourceManager S2(std::move(S1));
     ResourceManager(ResourceManager&& value) noexcept {
         if (&value == this)
         {
@@ -27,7 +27,7 @@ public:
         std::cout << "Resource moved." << std::endl;
     };
 
-    // ÒÆ¶¯¸³ÖµÔËËã·ûÖØÔØ  S1 = std::move(S2);
+    // ç§»åŠ¨èµ‹å€¼è¿ç®—ç¬¦é‡è½½  S1 = std::move(S2);
     ResourceManager& operator=(ResourceManager&& value) noexcept {
         if (&value == this)
         {
@@ -51,8 +51,8 @@ public:
         this->resource = std::make_unique<int>(newValue);
     };
 
-    ResourceManager(const ResourceManager& othre) = delete; // ½ûÓÃ¿½±´¹¹Ôìº¯Êı
-    ResourceManager& operator=(const ResourceManager& other) = delete; // ½ûÓÃ¿½±´¸³ÖµÔËËã·ûÖØÔØ
+    ResourceManager(const ResourceManager& othre) = delete; // ç¦ç”¨æ‹·è´æ„é€ å‡½æ•°
+    ResourceManager& operator=(const ResourceManager& other) = delete; // ç¦ç”¨æ‹·è´èµ‹å€¼è¿ç®—ç¬¦é‡è½½
 
 private:
     std::unique_ptr<int> resource;

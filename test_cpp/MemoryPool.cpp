@@ -1,6 +1,6 @@
-/*
+ï»¿/*
 * MemoryPool.cpp
-* Ê¹ÓÃÕ»ÊµÏÖÒ»¸öÄÚ´æ³Ø
+* ä½¿ç”¨æ ˆå®ç°ä¸€ä¸ªå†…å­˜æ± 
 * Created on: 2024-12-21
 */
 #include "MemoryPool.h"
@@ -10,7 +10,7 @@ CMemoryPool::CMemoryPool(size_t objSize, size_t totalSize) : objSize(objSize), t
     if (pool == nullptr) {
         throw std::bad_alloc();
     }
-    // ³õÊ¼»¯¿ÕÏĞÁ´±í
+    // åˆå§‹åŒ–ç©ºé—²é“¾è¡¨
     for (size_t i = 0; i < totalSize; i++) {
         freeList.push(pool + i * objSize);
     }
@@ -21,7 +21,7 @@ CMemoryPool::~CMemoryPool()
     free(pool);
 }
 
-// ÓÃ»§µ÷ÓÃAllocateº¯Êı·ÖÅäÄÚ´æ
+// ç”¨æˆ·è°ƒç”¨Allocateå‡½æ•°åˆ†é…å†…å­˜
 void* CMemoryPool::Allocate()
 {
     if (freeList.empty()) {

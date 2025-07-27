@@ -1,4 +1,4 @@
-#include "SocketServer.h"
+ï»¿#include "SocketServer.h"
 #include <thread>
 
 SocketServer::SocketServer() : m_socket(INVALID_SOCKET)
@@ -18,39 +18,39 @@ SocketServer::SocketServer() : m_socket(INVALID_SOCKET)
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(9527);
     if (bind(m_socket, (sockaddr*)&addr, sizeof(addr)) == SOCKET_ERROR) {
-        std::cerr << "Bind Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Bind å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
         return;
     }
     // 3. listen
     if (listen(m_socket, 5) == SOCKET_ERROR) {
-        std::cerr << "Listen Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Listen å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
         return;
     }
-    std::cout << "·þÎñÆ÷¼àÌý¶Ë¿Ú 9527..." << std::endl;
+    std::cout << "æœåŠ¡å™¨ç›‘å¬ç«¯å£ 9527..." << std::endl;
     // 4. accept
     int new_socket;
     sockaddr_in client_addr;
     int client_addr_len = sizeof(client_addr);
     new_socket = accept(m_socket, (SOCKADDR*)&client_addr, &client_addr_len);
     if (new_socket == INVALID_SOCKET) {
-        std::cerr << "Accept Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Accept å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
         return;
     }
 
-    std::cout << "¿Í»§¶ËÒÑÁ¬½Ó£¡" << std::endl;
+    std::cout << "å®¢æˆ·ç«¯å·²è¿žæŽ¥ï¼" << std::endl;
     char buf[1024];
     for (;;)
     {
         // 5. recv
         memset(buf, 0, sizeof(buf));
         recv(new_socket, buf, sizeof(buf), 0);
-        std::cout << "·þÎñÆ÷½ÓÊÕÏûÏ¢£º" << buf << std::endl;
+        std::cout << "æœåŠ¡å™¨æŽ¥æ”¶æ¶ˆæ¯ï¼š" << buf << std::endl;
         // 6. send
         for (size_t i = 0; buf[i] != '\0'; i++)
         {
@@ -65,22 +65,22 @@ SocketServer::SocketServer() : m_socket(INVALID_SOCKET)
     return;
 }
 
-// ¶àÏß³Ì²¢·¢·þÎñÆ÷
+// å¤šçº¿ç¨‹å¹¶å‘æœåŠ¡å™¨
 SocketServer::SocketServer(int serverType)
 {
     switch (serverType)
     {
     case 1:
-        std::cout << "¶àÏß³Ì²¢·¢·þÎñÆ÷" << std::endl;
+        std::cout << "å¤šçº¿ç¨‹å¹¶å‘æœåŠ¡å™¨" << std::endl;
         multiThreadServer();
         break;
     case 2:
-        std::cout << "IO¸´ÓÃ²¢·¢·þÎñÆ÷--Select" << std::endl;
+        std::cout << "IOå¤ç”¨å¹¶å‘æœåŠ¡å™¨--Select" << std::endl;
         SelectIOmultiplexingServer();
         break;
     case 3:
-        std::cout << "IO¸´ÓÃ²¢·¢·þÎñÆ÷--Epoll" << std::endl;
-        // Windows ÏÂÃ»ÓÐepoll £¬¿ÉÒÔ¿¼ÂÇ IOCP Ìæ´ú£¬»òÕßÊ¹ÓÃµÚÈý·½¿â
+        std::cout << "IOå¤ç”¨å¹¶å‘æœåŠ¡å™¨--Epoll" << std::endl;
+        // Windows ä¸‹æ²¡æœ‰epoll ï¼Œå¯ä»¥è€ƒè™‘ IOCP æ›¿ä»£ï¼Œæˆ–è€…ä½¿ç”¨ç¬¬ä¸‰æ–¹åº“
         //EpollIoMultiplexingServer();
         break;
     default:
@@ -105,18 +105,18 @@ void SocketServer::handleError(const char* s)
 
 void SocketServer::handleClient(int cli_socket)
 {
-    std::cout << "¿Í»§¶ËÒÑÁ¬½Ó, clisocket id£º" << cli_socket << std::endl;
+    std::cout << "å®¢æˆ·ç«¯å·²è¿žæŽ¥, clisocket idï¼š" << cli_socket << std::endl;
     char buf[1024];
     for (;;) {
         // 5. recv
         memset(buf, 0, sizeof(buf));
         int bytesReceived = recv(cli_socket, buf, sizeof(buf), 0);
         if (bytesReceived <= 0) {
-            std::cerr << "½ÓÊÕÊ§°Ü»ò¿Í»§¶Ë¶Ï¿ªÁ¬½Ó" << std::endl;
+            std::cerr << "æŽ¥æ”¶å¤±è´¥æˆ–å®¢æˆ·ç«¯æ–­å¼€è¿žæŽ¥" << std::endl;
             closesocket(cli_socket);
             return;
         }
-        std::cout << "·þÎñÆ÷½ÓÊÕÏûÏ¢£º" << buf << std::endl;
+        std::cout << "æœåŠ¡å™¨æŽ¥æ”¶æ¶ˆæ¯ï¼š" << buf << std::endl;
         // 6. send
         for (size_t i = 0; buf[i] != '\0'; i++)
         {
@@ -146,40 +146,40 @@ void SocketServer::multiThreadServer()
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(9527);
     if (bind(m_socket, (sockaddr*)&addr, sizeof(addr)) == SOCKET_ERROR) {
-        std::cerr << "Bind Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Bind å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
         return;
     }
     // 3. listen
     if (listen(m_socket, 5) == SOCKET_ERROR) {
-        std::cerr << "Listen Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Listen å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
         return;
     }
-    std::cout << "·þÎñÆ÷¼àÌý¶Ë¿Ú 9527..." << std::endl;
-    // 4. accept ¶àÏß³Ì²¢·¢·þÎñÆ÷
+    std::cout << "æœåŠ¡å™¨ç›‘å¬ç«¯å£ 9527..." << std::endl;
+    // 4. accept å¤šçº¿ç¨‹å¹¶å‘æœåŠ¡å™¨
     while (1) {
-        std::cout << "µÈ´ý¿Í»§¶ËÁ¬½Ó..." << std::endl;
+        std::cout << "ç­‰å¾…å®¢æˆ·ç«¯è¿žæŽ¥..." << std::endl;
         int new_socket;
         sockaddr_in client_addr;
         int client_addr_len = sizeof(client_addr);
         new_socket = accept(m_socket, (SOCKADDR*)&client_addr, &client_addr_len);
         if (new_socket == INVALID_SOCKET) {
-            std::cerr << "Accept Ê§°Ü: " << WSAGetLastError() << std::endl;
+            std::cerr << "Accept å¤±è´¥: " << WSAGetLastError() << std::endl;
             closesocket(m_socket);
             WSACleanup();
             return;
         }
-        std::cout << "¿Í»§¶ËÒÑÁ¬½Ó£¡" << std::endl;
+        std::cout << "å®¢æˆ·ç«¯å·²è¿žæŽ¥ï¼" << std::endl;
         std::thread t(&SocketServer::handleClient, this, new_socket);
         t.detach();
     }
     return;
 }
 
-// select IO¸´ÓÃ·þÎñÆ÷
+// select IOå¤ç”¨æœåŠ¡å™¨
 void SocketServer::SelectIOmultiplexingServer()
 {
     WSADATA wsaData;
@@ -197,42 +197,42 @@ void SocketServer::SelectIOmultiplexingServer()
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(9527);
     if (bind(m_socket, (sockaddr*)&addr, sizeof(addr)) == SOCKET_ERROR) {
-        std::cerr << "Bind Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Bind å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
         return;
     }
     // 3. listen
     if (listen(m_socket, 5) == SOCKET_ERROR) {
-        std::cerr << "Listen Ê§°Ü: " << WSAGetLastError() << std::endl;
+        std::cerr << "Listen å¤±è´¥: " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         WSACleanup();
         return;
     }
-    std::cout << "·þÎñÆ÷¼àÌý¶Ë¿Ú 9527..." << std::endl;
+    std::cout << "æœåŠ¡å™¨ç›‘å¬ç«¯å£ 9527..." << std::endl;
     // 4. accept--select
-    fd_set readfds, allfds; // readfds:¶ÁÎÄ¼þÃèÊö·û¼¯ºÏ£¬allfds:ËùÓÐÎÄ¼þÃèÊö·û¼¯ºÏ
-    FD_ZERO(&allfds); // Çå¿ÕÎÄ¼þÃèÊö·û¼¯ºÏ£¨Î»Í¼£©
-    FD_SET(m_socket, &allfds); // ½«¼àÌýÌ×½Ó×Ö¼ÓÈëÎÄ¼þÃèÊö·û¼¯ºÏ
-    int maxfd = m_socket; // ×î´óÎÄ¼þÃèÊö·û
-    int nready; // ×¼±¸ºÃµÄÎÄ¼þÃèÊö·û¸öÊý
+    fd_set readfds, allfds; // readfds:è¯»æ–‡ä»¶æè¿°ç¬¦é›†åˆï¼Œallfds:æ‰€æœ‰æ–‡ä»¶æè¿°ç¬¦é›†åˆ
+    FD_ZERO(&allfds); // æ¸…ç©ºæ–‡ä»¶æè¿°ç¬¦é›†åˆï¼ˆä½å›¾ï¼‰
+    FD_SET(m_socket, &allfds); // å°†ç›‘å¬å¥—æŽ¥å­—åŠ å…¥æ–‡ä»¶æè¿°ç¬¦é›†åˆ
+    int maxfd = m_socket; // æœ€å¤§æ–‡ä»¶æè¿°ç¬¦
+    int nready; // å‡†å¤‡å¥½çš„æ–‡ä»¶æè¿°ç¬¦ä¸ªæ•°
     while (1) {
         std::cout << "while..." << std::endl;
-        readfds = allfds; // ¶ÁÎÄ¼þÃèÊö·û¼¯ºÏ
+        readfds = allfds; // è¯»æ–‡ä»¶æè¿°ç¬¦é›†åˆ
         // 5. select
         nready = select(maxfd + 1, &readfds, NULL, NULL, NULL);
-        // selectÊ§°Ü
+        // selectå¤±è´¥
         if (nready == SOCKET_ERROR) {
-            std::cerr << "Select Ê§°Ü: " << WSAGetLastError() << std::endl;
+            std::cerr << "Select å¤±è´¥: " << WSAGetLastError() << std::endl;
             closesocket(m_socket);
             WSACleanup();
             return;
         }
-        // select³¬Ê±
+        // selectè¶…æ—¶
         if (nready == 0) {
             continue;
         }
-        // select³É¹¦
+        // selectæˆåŠŸ
         if (FD_ISSET(m_socket, &readfds)) {
             int new_socket;
             sockaddr_in client_addr;
@@ -240,16 +240,16 @@ void SocketServer::SelectIOmultiplexingServer()
             // 6. accept
             new_socket = accept(m_socket, (SOCKADDR*)&client_addr, &client_addr_len);
             if (new_socket == INVALID_SOCKET) {
-                std::cerr << "Accept Ê§°Ü: " << WSAGetLastError() << std::endl;
+                std::cerr << "Accept å¤±è´¥: " << WSAGetLastError() << std::endl;
                 closesocket(m_socket);
                 WSACleanup();
                 return;
             }
-            std::cout << "¿Í»§¶ËÒÑÁ¬½Ó£¡" << std::endl;
+            std::cout << "å®¢æˆ·ç«¯å·²è¿žæŽ¥ï¼" << std::endl;
             FD_SET(new_socket, &allfds);
             maxfd = max(maxfd, new_socket);
         }
-        // 7. recv/send ¼ì²éËùÓÐ¿Í»§¶ËÌ×½Ó×ÖÊÇ·ñÓÐÊý¾Ý¿É¶Á
+        // 7. recv/send æ£€æŸ¥æ‰€æœ‰å®¢æˆ·ç«¯å¥—æŽ¥å­—æ˜¯å¦æœ‰æ•°æ®å¯è¯»
         for (int i = m_socket + 1; i <= maxfd; i++) {
             std::cout << "lfd..." << m_socket << std::endl;
             std::cout << "maxfd..." << maxfd << std::endl;
@@ -259,12 +259,12 @@ void SocketServer::SelectIOmultiplexingServer()
                 memset(buf, 0, sizeof(buf));
                 int bytesReceived = recv(i, buf, sizeof(buf), 0);
                 if (bytesReceived <= 0) {
-                    std::cerr << "½ÓÊÕÊ§°Ü»ò¿Í»§¶Ë¶Ï¿ªÁ¬½Ó" << std::endl;
+                    std::cerr << "æŽ¥æ”¶å¤±è´¥æˆ–å®¢æˆ·ç«¯æ–­å¼€è¿žæŽ¥" << std::endl;
                     closesocket(i);
                     FD_CLR(i, &allfds);
                     continue;
                 }
-                std::cout << "·þÎñÆ÷½ÓÊÕÏûÏ¢£º" << buf << std::endl;
+                std::cout << "æœåŠ¡å™¨æŽ¥æ”¶æ¶ˆæ¯ï¼š" << buf << std::endl;
                 for (size_t i = 0; buf[i] != '\0'; i++)
                 {
                     buf[i] = std::toupper(buf[i]);

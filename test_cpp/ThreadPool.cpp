@@ -1,4 +1,4 @@
-#include "ThreadPool.h"
+ï»¿#include "ThreadPool.h"
 
 ThreadPool::ThreadPool(size_t threadCount) : stop(false) {
     for (size_t i = 0; i < threadCount; ++i) {
@@ -8,11 +8,11 @@ ThreadPool::ThreadPool(size_t threadCount) : stop(false) {
 
 ThreadPool::~ThreadPool() {
     stop.store(true);
-    condition.notify_all();  // »½ĞÑËùÓĞÏß³Ì£¬ÈÃËüÃÇÍË³ö
+    condition.notify_all();  // å”¤é†’æ‰€æœ‰çº¿ç¨‹ï¼Œè®©å®ƒä»¬é€€å‡º
 
     for (std::thread& worker : workers) {
         if (worker.joinable()) {
-            worker.join();  // µÈ´ıÏß³ÌÖ´ĞĞÍê±Ï
+            worker.join();  // ç­‰å¾…çº¿ç¨‹æ‰§è¡Œå®Œæ¯•
         }
     }
 }
@@ -26,7 +26,7 @@ void ThreadPool::enqueue(std::function<void()> task) {
         tasks.push(task);
     }
 
-    condition.notify_one();  // »½ĞÑÒ»¸öÏß³ÌÖ´ĞĞÈÎÎñ
+    condition.notify_one();  // å”¤é†’ä¸€ä¸ªçº¿ç¨‹æ‰§è¡Œä»»åŠ¡
 }
 
 void ThreadPool::worker() {
@@ -37,12 +37,12 @@ void ThreadPool::worker() {
             std::unique_lock<std::mutex> lock(queueMutex);
             condition.wait(lock, [this] { return stop.load() || !tasks.empty(); });
 
-            if (stop.load() && tasks.empty()) return;  // Ïß³Ì³ØÍ£Ö¹ÇÒÈÎÎñ¶ÓÁĞÎª¿ÕÊ±ÍË³ö
+            if (stop.load() && tasks.empty()) return;  // çº¿ç¨‹æ± åœæ­¢ä¸”ä»»åŠ¡é˜Ÿåˆ—ä¸ºç©ºæ—¶é€€å‡º
 
             task = tasks.front();
             tasks.pop();
         }
 
-        task();  // Ö´ĞĞÈÎÎñ
+        task();  // æ‰§è¡Œä»»åŠ¡
     }
 }

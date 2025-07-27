@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <stack>
 
 class CMemoryPool
@@ -6,13 +6,13 @@ class CMemoryPool
 public:
     CMemoryPool(size_t objSize, size_t totalSize);
     ~CMemoryPool();
-    void* Allocate(); // ·ÖÅäÄÚ´æ
-    void Free(void* p); // ÊÍ·ÅÄÚ´æ
+    void* Allocate(); // åˆ†é…å†…å­˜
+    void Free(void* p); // é‡Šæ”¾å†…å­˜
 
 private:
-    size_t objSize; // ¶ÔÏó´óĞ¡
-    size_t totalSize; // ×Ü´óĞ¡
-    char* pool; // ÄÚ´æ³ØÖ¸Õë
-    std::stack<void*> freeList; // ¿ÕÏĞÁ´±í
+    size_t objSize; // å¯¹è±¡å¤§å°
+    size_t totalSize; // æ€»å¤§å°
+    char* pool; // å†…å­˜æ± æŒ‡é’ˆ
+    std::stack<void*> freeList; // ç©ºé—²é“¾è¡¨
 };
 

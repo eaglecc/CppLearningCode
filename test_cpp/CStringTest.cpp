@@ -1,27 +1,27 @@
-#include <cstring>
+ï»¿#include <cstring>
 #include <iostream>
 
 #pragma warning(disable:4996)
 
-// ×Ô¶¨Òå×Ö·û¸´ÖÆº¯Êı£¬½«src¸´ÖÆµ½destÖĞ£¬·µ»Ødest
+// è‡ªå®šä¹‰å­—ç¬¦å¤åˆ¶å‡½æ•°ï¼Œå°†srcå¤åˆ¶åˆ°destä¸­ï¼Œè¿”å›dest
 char* my_strcpy(char* dest, const char* src) {
-    // Ê¹ÓÃÒ»¸öÖ¸Õë±éÀúÔ´×Ö·û´®
-    char* original_dest = dest; // ±£´æÄ¿±ê×Ö·û´®µÄÆğÊ¼µØÖ·
+    // ä½¿ç”¨ä¸€ä¸ªæŒ‡é’ˆéå†æºå­—ç¬¦ä¸²
+    char* original_dest = dest; // ä¿å­˜ç›®æ ‡å­—ç¬¦ä¸²çš„èµ·å§‹åœ°å€
 
-    while (*src != '\0') { // µ±Ô´×Ö·û²»ÊÇ½áÊø·û
-        *dest = *src;       // ¸´ÖÆ×Ö·û
-        dest++;             // ÒÆ¶¯Ä¿±êÖ¸Õë
-        src++;              // ÒÆ¶¯Ô´Ö¸Õë
+    while (*src != '\0') { // å½“æºå­—ç¬¦ä¸æ˜¯ç»“æŸç¬¦
+        *dest = *src;       // å¤åˆ¶å­—ç¬¦
+        dest++;             // ç§»åŠ¨ç›®æ ‡æŒ‡é’ˆ
+        src++;              // ç§»åŠ¨æºæŒ‡é’ˆ
     }
-    *dest = '\0'; // ÔÚÄ¿±ê×Ö·û´®Ä©Î²Ìí¼Ó½áÊø·û
+    *dest = '\0'; // åœ¨ç›®æ ‡å­—ç¬¦ä¸²æœ«å°¾æ·»åŠ ç»“æŸç¬¦
 
-    return original_dest; // ·µ»ØÄ¿±ê×Ö·û´®µÄÆğÊ¼µØÖ·
+    return original_dest; // è¿”å›ç›®æ ‡å­—ç¬¦ä¸²çš„èµ·å§‹åœ°å€
 }
 
-// ×Ô¶¨Òå×Ö·û´®Æ´½Óº¯Êı£¬½«srcÆ´½Óµ½destºóÃæ£¬·µ»Ødest
+// è‡ªå®šä¹‰å­—ç¬¦ä¸²æ‹¼æ¥å‡½æ•°ï¼Œå°†srcæ‹¼æ¥åˆ°deståé¢ï¼Œè¿”å›dest
 char* my_strcat(char *dest, const char* src) {
     char* original_dest = dest;
-    // ±éÀúµ½destµÄÄ©Î²
+    // éå†åˆ°destçš„æœ«å°¾
     while (*dest != '\0') {
         dest++;
     }
@@ -37,14 +37,14 @@ char* my_strcat(char *dest, const char* src) {
 //int main() {
 //    char str1[20] = "Hello ";
 //    const char* str2 = "World";
-//    //char* res = strcat(str1, str2); // ×Ö·û´®Æ´½Ó
-//    //std::cout << "strcat×Ö·û´®Æ´½Ó½á¹û£º" << res << std::endl;
+//    //char* res = strcat(str1, str2); // å­—ç¬¦ä¸²æ‹¼æ¥
+//    //std::cout << "strcatå­—ç¬¦ä¸²æ‹¼æ¥ç»“æœï¼š" << res << std::endl;
 //
 //    //strcat_s(str1, sizeof(str1), str2);
 //    //std::cout << str1 << std::endl;
 //
 //    //strcpy(str1 + strlen(str1), str2);
-//    //std::cout << "strcpy×Ö·û´®¸´ÖÆÊµÏÖÆ´½Ó½á¹û£º" << str1 << std::endl;
+//    //std::cout << "strcpyå­—ç¬¦ä¸²å¤åˆ¶å®ç°æ‹¼æ¥ç»“æœï¼š" << str1 << std::endl;
 //
 //    //my_strcpy(str1 + strlen(str1), str2);
 //    //std::cout << str1 << std::endl;

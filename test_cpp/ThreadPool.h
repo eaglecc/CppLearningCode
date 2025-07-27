@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <vector>
 #include <queue>
@@ -13,15 +13,15 @@ public:
     explicit ThreadPool(size_t threadCount);
     ~ThreadPool();
 
-    void enqueue(std::function<void()> task);  // Ìí¼ÓÈÎÎñ
+    void enqueue(std::function<void()> task);  // æ·»åŠ ä»»åŠ¡
 
 private:
-    void worker();  // Ïß³ÌÖ´ĞĞµÄÈÎÎñ
+    void worker();  // çº¿ç¨‹æ‰§è¡Œçš„ä»»åŠ¡
 
-    std::vector<std::thread> workers;       // Ïß³Ì³Ø
-    std::queue<std::function<void()>> tasks; // ÈÎÎñ¶ÓÁĞ
+    std::vector<std::thread> workers;       // çº¿ç¨‹æ± 
+    std::queue<std::function<void()>> tasks; // ä»»åŠ¡é˜Ÿåˆ—
 
-    std::mutex queueMutex;                  // »¥³âËø±£»¤ÈÎÎñ¶ÓÁĞ
-    std::condition_variable condition;      // Ìõ¼ş±äÁ¿¿ØÖÆÈÎÎñµ÷¶È
-    std::atomic<bool> stop;                 // ÊÇ·ñÍ£Ö¹Ïß³Ì³Ø
+    std::mutex queueMutex;                  // äº’æ–¥é”ä¿æŠ¤ä»»åŠ¡é˜Ÿåˆ—
+    std::condition_variable condition;      // æ¡ä»¶å˜é‡æ§åˆ¶ä»»åŠ¡è°ƒåº¦
+    std::atomic<bool> stop;                 // æ˜¯å¦åœæ­¢çº¿ç¨‹æ± 
 };

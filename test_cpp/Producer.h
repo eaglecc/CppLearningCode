@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <thread>
 #include <mutex>
 #include <queue>
 #include <condition_variable>
 
-// Éú²úÕß-Ïû·ÑÕßÄ£ĞÍ
+// ç”Ÿäº§è€…-æ¶ˆè´¹è€…æ¨¡å‹
 class Producer
 {
 public:
@@ -19,14 +19,14 @@ public:
     void stopProcessing();
 
 public:
-    std::queue<int> buffer;             // ÈÎÎñ¶ÓÁĞ
-    size_t maxSize;                     // ¶ÓÁĞ×î´óÈİÁ¿
-    bool stop;                          // Ïß³ÌÍ£Ö¹±êÖ¾
+    std::queue<int> buffer;             // ä»»åŠ¡é˜Ÿåˆ—
+    size_t maxSize;                     // é˜Ÿåˆ—æœ€å¤§å®¹é‡
+    bool stop;                          // çº¿ç¨‹åœæ­¢æ ‡å¿—
 
-    std::mutex mtx;                     // »¥³âËø
-    std::condition_variable condVar;    // Ìõ¼ş±äÁ¿
+    std::mutex mtx;                     // äº’æ–¥é”
+    std::condition_variable condVar;    // æ¡ä»¶å˜é‡
 
-    std::vector<std::thread> producers; // Éú²úÕßÏß³Ì
-    std::vector<std::thread> consumers; // Ïû·ÑÕßÏß³Ì
+    std::vector<std::thread> producers; // ç”Ÿäº§è€…çº¿ç¨‹
+    std::vector<std::thread> consumers; // æ¶ˆè´¹è€…çº¿ç¨‹
 };
 
