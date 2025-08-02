@@ -18,14 +18,19 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="test_lmd.cpp">
+    <ClCompile Include="xthread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="thread_shared.cpp">
+    <ClCompile Include="xmsg_server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="thread_RAII.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xthread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xmsg_server.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

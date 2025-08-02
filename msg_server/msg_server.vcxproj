@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{08084c69-9cce-4256-b0f7-5507eaa5db98}</ProjectGuid>
-    <RootNamespace>threadpool</RootNamespace>
+    <ProjectGuid>{53becaf4-ccb3-4f7b-a121-f212c2267bcd}</ProjectGuid>
+    <RootNamespace>msgserver</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -93,8 +93,6 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -121,16 +119,17 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="test_lmd.cpp" />
-    <ClCompile Include="thread_RAII.cpp" />
-    <ClCompile Include="thread_shared.cpp" />
+    <ClCompile Include="xmsg_server.cpp" />
+    <ClCompile Include="xthread.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xmsg_server.h" />
+    <ClInclude Include="xthread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

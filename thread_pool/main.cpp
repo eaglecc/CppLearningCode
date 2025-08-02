@@ -1,4 +1,4 @@
-﻿#include <thread>
+#include <thread>
 #include <iostream>
 
 using namespace std;
@@ -26,7 +26,7 @@ public:
             th_.join();
         }
     }
-    virtual void Stop() {
+    virtual void () {
         is_exit_ = true;
         Wait();
     }

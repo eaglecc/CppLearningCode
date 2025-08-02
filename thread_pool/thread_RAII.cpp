@@ -1,4 +1,4 @@
-#include <thread>
+﻿#include <thread>
 #include <iostream>
 #include <mutex>
 
@@ -17,14 +17,14 @@ public:
     }
 
 private:
-    mutex& m_mux; // ������Ҫ�ڳ�ʼ����ʱ��ֵ
+    mutex& m_mux; // 引用需要在初始化的时候赋值
 };
 
 static mutex mux;
 void TestMutex() {
-    XMutex lock(mux); // ջ�е���Դ��������ʱ�����
-    // һЩ��ʱ��ҵ���߼�...
-    // �Ҵ����� ������ʱ�� lock �ᱻ�Զ��ͷţ�Ȼ�������������������
+    XMutex lock(mux); // 栈中的资源，创建的时候加锁
+    // 一些耗时的业务逻辑...
+    // 右大括号 结束的时候 lock 会被自动释放，然后调用析构函数，解锁
 }
 
 int main(int argc, char* argv[] )

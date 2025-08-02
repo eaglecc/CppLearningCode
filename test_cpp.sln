@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_client", "test_client\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "thread_pool", "thread_pool\thread_pool.vcxproj", "{08084C69-9CCE-4256-B0F7-5507EAA5DB98}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msg_server", "msg_server\msg_server.vcxproj", "{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{08084C69-9CCE-4256-B0F7-5507EAA5DB98}.Release|x64.Build.0 = Release|x64
 		{08084C69-9CCE-4256-B0F7-5507EAA5DB98}.Release|x86.ActiveCfg = Release|Win32
 		{08084C69-9CCE-4256-B0F7-5507EAA5DB98}.Release|x86.Build.0 = Release|Win32
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Debug|x64.ActiveCfg = Debug|x64
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Debug|x64.Build.0 = Debug|x64
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Debug|x86.ActiveCfg = Debug|Win32
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Debug|x86.Build.0 = Debug|Win32
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Release|x64.ActiveCfg = Release|x64
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Release|x64.Build.0 = Release|x64
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Release|x86.ActiveCfg = Release|Win32
+		{53BECAF4-CCB3-4F7B-A121-F212C2267BCD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
