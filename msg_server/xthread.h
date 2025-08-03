@@ -16,10 +16,12 @@ public:
 
     bool is_exit();
 
+protected:
+    bool is_exit_{ false }; // 派生类可以访问
+
 private:
     virtual void Main() = 0; // 线程主入口
 
-    bool is_exit_{ false };
     std::thread th_;
 };
 

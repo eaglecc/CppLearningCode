@@ -11,6 +11,8 @@ public:
     
     // 给当前线程发消息
     void SendMsg(const std::string& msg);
+
+    void Stop() override;
 private:
 
     // 消息队列缓冲 ,std::list不是线程安全的，因此需要锁来保护
@@ -18,5 +20,8 @@ private:
 
     // 互斥锁，保护消息队列
     std::mutex mux_;
+
+    // 条件变量
+    std::condition_variable cv_;
 };
 
