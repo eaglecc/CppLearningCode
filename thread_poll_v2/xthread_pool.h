@@ -21,6 +21,8 @@ public:
     void Start();
     // 插入一个任务到线程池
     void AddTask(XTask* task);
+    // 获取任务
+    XTask* GetTask();
 
 private:
     // 线程池线程的入口函数
@@ -30,5 +32,6 @@ private:
     std::mutex mux_;
     std::vector<std::thread*> threads_;
     std::list<XTask*> tasks_; // 任务队列 
+    std::condition_variable cv_;
 };
 
