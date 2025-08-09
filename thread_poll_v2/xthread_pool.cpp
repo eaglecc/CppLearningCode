@@ -25,12 +25,16 @@ void XThreadPool::Start()
 
     for (size_t i = 0; i < thread_num_; i++)
     {
-        std::thread* th = new std::thread(&XThreadPool::Run, this); // new 完了之后，会立即启动Run函数，所以这里创建了 thread_num_ 个线程，每个线程都会执行 Run 函数
+        // std::thread* th = new std::thread(&XThreadPool::Run, this); // new 完了之后，会立即启动Run函数，所以这里创建了 thread_num_ 个线程，每个线程都会执行 Run 函数
+        //threads_.push_back(th);
+        auto th = std::make_shared<std::thread>(&XThreadPool::Run, this); // 使用智能指针管理线程
         threads_.push_back(th);
+
     }
 }
 
-void XThreadPool::AddTask(XTask* task)
+//void XThreadPool::AddTask(XTask* task)
+void XThreadPool::AddTask(std::shared_ptr<XTask> task)
 {
     std::unique_lock<std::mutex> lock(mux_);
     tasks_.push_back(task);
@@ -39,7 +43,9 @@ void XThreadPool::AddTask(XTask* task)
     cv_.notify_one(); // 通知一个等待的线程有新任务到来
 }
 
-XTask* XThreadPool::GetTask()
+
+// XTask* XThreadPool::GetTask()
+std::shared_ptr<XTask> XThreadPool::GetTask()
 {
     std::unique_lock<std::mutex> lock(mux_);
     if (tasks_.empty())
@@ -63,14 +69,17 @@ void XThreadPool::Run()
     std::cout << "ThreadPool Run..." << std::this_thread::get_id() << std::endl;
     // 每个工作线程都会不断地从任务队列中获取任务并执行，直到线程池被销毁或停止
     while (!is_exit()) {
-        XTask* task = GetTask();
+        auto task = GetTask();
         if (!task) continue; // 如果没有任务，继续等待
+        ++task_run_count_; // 增加正在运行的任务数量
         try {
-            task->Run();
+           auto res = task->Run();
+           task->SetValue(res); // 设置任务执行结果
         }
         catch (...) {
             // 处理任务执行中的异常
         }
+        --task_run_count_; // 执行完任务后减少正在运行的任务数量
     }
 }
 

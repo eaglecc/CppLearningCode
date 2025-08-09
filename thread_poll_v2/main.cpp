@@ -15,7 +15,7 @@ public:
             std::cout << "." << std::flush;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }
-        return 0;
+        return 100;
     }
     std::string name = "";
 private:
@@ -28,11 +28,20 @@ int main(int argc, char *argv[]) {
     pool.Init(16);
     pool.Start();
 
-    MyTask task1;
-    task1.name = "Task 1";
-    pool.AddTask(&task1);
+    //MyTask task1;
+    //task1.name = "Task 1";
+    auto task3 = std::make_shared<MyTask>();
+    task3->name = "Task 3";
+
+    //pool.AddTask(&task1);
+    pool.AddTask(task3);
+
+    std::cout << "task3 Return is : " << task3->GetReturn() << std::endl;
+    std::cout << "task run count is ..." << pool.task_run_count() << std::endl;
+
     std::this_thread::sleep_for(std::chrono::seconds(1));
     pool.Stop();
+    std::cout << "task run count is ..." << pool.task_run_count() << std::endl;
 
     getchar();
     return 0;
